@@ -19,7 +19,18 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-
+    
+    proxy: {// 设置跨域
+      '/api': {
+   
+        // target:'http://192.168.31.244:8888',       
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+     },
     
     /**
      * Source Maps

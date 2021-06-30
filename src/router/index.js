@@ -3,10 +3,18 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
-  routes: [
+const routes = [
     {
-      path: '/',
+      path:'/',
+      redirect:'/login'
+    },
+    {
+      path:'/login',
+      name:'login',
+      component:() => import('@/views/Login/index')
+    },
+    {
+      path: '/WorkBench',
       name: 'WorkBench',
       component: ()=>import("@/views/WorkBench")
     },
@@ -50,4 +58,27 @@ export default new Router({
     
     
   ]
-})
+
+
+  const router = new Router({
+    mode: 'history',
+    // base: process.env.BASE_URL,
+    // base:'fda-admin',
+    routes
+  });
+
+  // 路由守卫
+  router.beforeEach((to,from,next) => {
+  const isLogin = localStorage.eleToken?true:false;
+  if(
+    to.path == "/login"
+  
+  ) {
+    next();
+  }else{
+    isLogin?next():next('/login');
+  }
+});
+
+export default router
+
