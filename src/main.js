@@ -8,6 +8,8 @@ import axios from 'axios';
 Vue.prototype.$http = axios;
 import 'vant/lib/index.css'
 
+import date from '@/utils/date';
+
 Vue.config.productionTip = false
 Vue.use(vant)
 /* eslint-disable no-new */
